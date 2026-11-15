@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru" class="__variable_ac3859">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор себестоимости услуги и минимальной цены для салона</title>
+<meta name="description" content="Бесплатный калькулятор: считает себестоимость услуги с учётом часа кресла, расходников и оплаты мастера, показывает минимальную цену, цену под желаемую прибыль и точку окупаемости. Без регистрации, всё считается в браузере.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Калькулятор себестоимости услуги и минимальной цены для салона">
+<meta property="og:description" content="Считает час кресла, себестоимость услуги и минимальную цену. Без регистрации, всё считается в браузере.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/v3.css">
+<style>
+  body{margin:0;font-family:var(--font-v3),system-ui,sans-serif}
+  .v3-header{position:static;background:var(--surface)}
+</style>
+</head>
+<body class="v3">
+
+<header class="v3-header">
+  <div class="v3-wrap v3-header-in">
+    <a class="v3-logo" href="../index.html">
+      <svg class="v3-logo-s" viewBox="0 0 48 48" width="25" height="25" fill="none" aria-hidden="true"><defs><linearGradient id="v3-logo-s-g" x1="7" y1="5" x2="41" y2="43" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8a9dff"></stop><stop offset=".48" stop-color="#3a56ee"></stop><stop offset="1" stop-color="#2438cc"></stop></linearGradient></defs><path d="M34.5 15.5a9.5 9.5 0 1 0-10.5 9.5 9.5 9.5 0 1 1-10.5 9.5" stroke="url(#v3-logo-s-g)" stroke-width="5.4" stroke-linecap="round" fill="none"></path></svg>Стэлакс
+    </a>
+    <div class="v3-head-actions">
+      <a class="v3-btn v3-btn-ghost" href="../index.html">Все инструменты</a>
+      <a class="v3-btn v3-btn-solid" href="https://stelaxai.ru" target="_blank" rel="noopener">Стэлакс за 1 ₽</a>
+    </div>
+  </div>
+</header>
+
+<main class="v3-blog" style="padding-bottom:0">
+  <div class="v3-wrap">
+    <header class="v3-blog-head">
+      <h1>Калькулятор себестоимости услуги и минимальной цены</h1>
+      <p class="v3-blog-lede">Поставьте длительность услуги, расходники, постоянные расходы салона и условия оплаты мастера. Калькулятор покажет, во что услуга обходится салону и ниже какой цены её брать нельзя. Без регистрации, все числа остаются в вашем браузере.</p>
+    </header>
+  </div>
+
+  <div class="v3-wrap v3-panel-shell">
+    <div class="v3-panel">
+      <div class="v3-panel-head">
+        <h2>Ваши числа</h2>
+        <p>Меняйте любое поле, результат пересчитывается сразу. Введённое сохраняется только у вас, на наш сервер ничего не уходит.</p>
+      </div>
+      <div class="v3-own">
+        <form id="calc">
+          <fieldset class="v3-fs">
+            <legend class="v3-flegend">Услуга</legend>
+            <div class="v3-fgroup">
+              <div class="v3-frow">
+                <div class="v3-ff"><input id="dur" type="number" min="0" step="1" inputmode="numeric" value="90" placeholder=" "><label for="dur">Услуга занимает, минут</label></div>
+                <div class="v3-ff"><input id="clean" type="number" min="0" step="1" inputmode="numeric" value="15" placeholder=" "><label for="clean">Уборка и подготовка, минут</label></div>
+              </div>
+              <div class="v3-frow">
+                <div class="v3-ff"><input id="mat" type="number" min="0" step="1" inputmode="numeric" value="600" placeholder=" "><label for="mat">Расходники на одну услугу, ₽</label></div>
+                <div class="v3-ff"><input id="price" type="number" min="0" step="1" inputmode="numeric" value="3500" placeholder=" "><label for="price">Цена, которую берёте сейчас, ₽</label></div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="v3-fs" style="margin-top:28px">
+            <legend class="v3-flegend">Салон</legend>
+            <div class="v3-fgroup">
+              <div class="v3-frow">
+                <div class="v3-ff"><input id="fixed" type="number" min="0" step="1" inputmode="numeric" value="180000" placeholder=" "><label for="fixed">Постоянные расходы в месяц, ₽</label></div>
+                <div class="v3-ff"><input id="days" type="number" min="0" step="1" inputmode="numeric" value="26" placeholder=" "><label for="days">Рабочих дней в месяц</label></div>
+              </div>
+              <div class="v3-frow">
+                <div class="v3-ff"><input id="hours" type="number" min="0" step="1" inputmode="numeric" value="11" placeholder=" "><label for="hours">Часов работы в день</label></div>
+                <div class="v3-ff"><input id="load" type="number" min="0" max="100" step="1" inputmode="numeric" value="60" placeholder=" "><label for="load">Загрузка кресла, процентов</label></div>
+              </div>
+              <div class="v3-frow">
+                <div class="v3-fcontent">
+                  <span class="v3-flabel">Что входит в постоянные расходы</span>
+                  <p class="v3-fdesc">Аренда, коммуналка, оклад администратора, реклама, подписки, бухгалтерия, уборка. Всё, что салон платит, даже если за день не пришёл ни один клиент. Расходники сюда не входят, они считаются выше.</p>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="v3-fs" style="margin-top:28px">
+            <legend class="v3-flegend">Оплата мастера</legend>
+            <div class="v3-fgroup">
+              <div class="v3-frow">
+                <div class="v3-fcontent">
+                  <span class="v3-flabel">Как платите мастеру</span>
+                  <p class="v3-fdesc">Процент от чека считается иначе, чем ставка за час: подняв цену, вы поднимаете и выплату. Вариант «себе» для случая, когда мастер вы сами.</p>
+                </div>
+                <div class="v3-switch" id="paymode" role="radiogroup" aria-label="Как платите мастеру">
+                  <span class="v3-switch-pill" aria-hidden="true" style="left:0;top:0;width:0;height:0;opacity:0;transition:none"></span>
+                  <button type="button" role="radio" aria-checked="true" class="v3-switch-btn is-on" data-value="pct" aria-label="Процент от чека">Процент</button>
+                  <button type="button" role="radio" aria-checked="false" class="v3-switch-btn" data-value="hour" aria-label="Ставка за час">За час</button>
+                  <button type="button" role="radio" aria-checked="false" class="v3-switch-btn" data-value="self" aria-label="Мастер это вы, оплата не считается">Себе</button>
+                </div>
+              </div>
+              <div class="v3-frow">
+                <div class="v3-ff"><input id="payval" type="number" min="0" step="1" inputmode="numeric" value="40" placeholder=" "><label for="payval" id="pay-label">Процент мастеру от чека</label></div>
+                <div class="v3-ff"><input id="goal" type="number" min="0" step="1" inputmode="numeric" value="700" placeholder=" "><label for="goal">Хочу зарабатывать с часа, ₽</label></div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <section class="v3-sec" id="rezultat">
+    <div class="v3-wrap">
+      <header class="v3-blog-head">
+        <h2>Что получается</h2>
+        <p class="v3-blog-lede">Три числа, по которым видно, сходится ли ваша цена. Пересчитываются на каждое изменение в анкете.</p>
+      </header>
+      <div class="v3-plans">
+      <div class="v3-plan">
+        <div class="v3-plan-head"><p class="v3-plan-name">Минимальная цена</p></div>
+        <p class="v3-plan-price" id="r-min">0 ₽</p>
+        <p class="v3-plan-note" id="r-min-note">Ниже этой суммы услуга съедает деньги салона</p>
+      </div>
+      <div class="v3-plan">
+        <div class="v3-plan-head"><p class="v3-plan-name">Цена под вашу цель</p></div>
+        <p class="v3-plan-price" id="r-goal">0 ₽</p>
+        <p class="v3-plan-note">С этой ценой вы выходите на желаемую прибыль с часа работы кресла</p>
+      </div>
+      <div class="v3-plan">
+        <div class="v3-plan-head"><p class="v3-plan-name">Остаётся с услуги сейчас</p></div>
+        <p class="v3-plan-price" id="r-margin">0 ₽</p>
+        <p class="v3-plan-note" id="r-margin-note">Поставьте текущую цену услуги, и здесь появится ваша маржа</p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="v3-sec" id="raschet">
+    <div class="v3-wrap">
+      <header class="v3-blog-head">
+        <h2>Откуда эти числа</h2>
+        <p class="v3-blog-lede">Весь расчёт по шагам, чтобы можно было проверить каждую строчку и объяснить её мастеру.</p>
+      </header>
+      <div class="v3-panel">
+      <div class="v3-own">
+        <div class="v3-fs">
+          <div class="v3-frow">
+            <div class="v3-fcontent"><span class="v3-flabel">Занятых часов кресла в месяц</span><p class="v3-fdesc">Рабочие дни, умноженные на часы и на загрузку.</p></div>
+            <span class="v3-flabel" id="d-busy">0 ч</span>
+          </div>
+          <div class="v3-frow">
+            <div class="v3-fcontent"><span class="v3-flabel">Час кресла</span><p class="v3-fdesc">Постоянные расходы, разложенные на занятые часы. Главное число, которое обычно не считают.</p></div>
+            <span class="v3-flabel" id="d-chair">0 ₽</span>
+          </div>
+          <div class="v3-frow">
+            <div class="v3-fcontent"><span class="v3-flabel">Услуга занимает кресло</span><p class="v3-fdesc">Сама услуга плюс уборка и подготовка.</p></div>
+            <span class="v3-flabel" id="d-time">0 мин</span>
+          </div>
+          <div class="v3-frow">
+            <div class="v3-fcontent"><span class="v3-flabel">Кресло на одну услугу</span><p class="v3-fdesc">Час кресла, умноженный на занятое время.</p></div>
+            <span class="v3-flabel" id="d-chair-svc">0 ₽</span>
+          </div>
+          <div class="v3-frow">
+            <div class="v3-fcontent"><span class="v3-flabel">Мастеру за услугу</span><p class="v3-fdesc">По вашей текущей цене и выбранным условиям оплаты.</p></div>
+            <span class="v3-flabel" id="d-pay">0 ₽</span>
+          </div>
+          <div class="v3-frow">
+            <div class="v3-fcontent"><span class="v3-flabel">Себестоимость услуги</span><p class="v3-fdesc">Расходники плюс кресло плюс оплата мастера.</p></div>
+            <span class="v3-flabel" id="d-cost">0 ₽</span>
+          </div>
+          <div class="v3-frow">
+            <div class="v3-fcontent"><span class="v3-flabel">Сколько таких услуг окупают месяц</span><p class="v3-fdesc">Сколько раз надо оказать эту услугу по текущей цене, чтобы закрыть постоянные расходы салона.</p></div>
+            <span class="v3-flabel" id="d-be">0 шт</span>
+          </div>
+        </div>
+        <p style="margin:24px 0 0"><button type="button" id="dl" class="v3-btn v3-btn-ghost">Скачать расчёт текстом</button></p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="v3-sec" id="kak">
+    <div class="v3-post-col">
+      <div class="prose">
+        <h2>Зачем считать себестоимость услуги</h2>
+        <p>Цену в салоне чаще ставят по соседям: посмотрели прайс через улицу и поставили так же. Но аренда, загрузка кресла и условия мастера у вас другие, поэтому одна и та же цифра у соседа может быть прибылью, а у вас убытком. Расходники видно сразу, а деньги незаметно съедает время: пока идёт услуга, кресло занято и за него уже заплачено арендой.</p>
+        <p>Калькулятор раскладывает постоянные расходы на занятые часы и показывает, сколько стоит час кресла. Дальше считает, сколько кресла съедает услуга вместе с уборкой, и добавляет расходники и оплату мастера. Получается себестоимость и минимальная цена.</p>
+        <h3>Как пользоваться</h3>
+        <p>Заполните три блока: услугу, салон и оплату мастера. В постоянные расходы впишите всё, что салон платит каждый месяц независимо от записей. Загрузку кресла возьмите из своей записи. Если платите мастеру процент от чека, выберите этот режим: калькулятор учтёт, что при подъёме цены выплата растёт вместе с ней.</p>
+        <h3>Пример</h3>
+        <p>Услуга идёт 90 минут, ещё 15 минут уходит на уборку, расходников на 600 ₽, цена 3500 ₽. Салон платит 180 000 ₽ в месяц, работает 26 дней по 11 часов, кресло занято на 60 процентов, мастер получает 40 процентов от чека. Подставьте свои числа в поля выше и посмотрите, сходится ли ваша текущая цена с минимальной.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="v3-sec" id="faq">
+    <div class="v3-wrap v3-faq-grid">
+      <div class="v3-split-copy">
+        <h2>Частые<br>вопросы</h2>
+        <p>Что спрашивают про расчёт себестоимости чаще всего.</p>
+      </div>
+      <div class="v3-faq">
+      <div class="v3-faq-item">
+        <button type="button" class="v3-faq-q" aria-expanded="false"><span>Что писать в постоянные расходы</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <div class="v3-faq-a"><div><p>Всё, что салон платит каждый месяц, даже когда в записи пусто: аренда, коммуналка, оклад администратора, реклама, подписки на сервисы, бухгалтерия, уборка, обслуживание кассы. Расходники и оплату мастера сюда не вносите, они считаются отдельно по каждой услуге, иначе одни и те же деньги попадут в расчёт дважды.</p></div></div>
+      </div>
+      <div class="v3-faq-item">
+        <button type="button" class="v3-faq-q" aria-expanded="false"><span>Откуда взять загрузку кресла</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <div class="v3-faq-a"><div><p>Из своей записи за прошлый месяц. Поделите часы, на которые были записи, на все рабочие часы кресла. Если точных данных нет, посчитайте по памяти за неделю. Чем ниже загрузка, тем дороже каждый занятый час, потому что пустые часы тоже оплачены арендой.</p></div></div>
+      </div>
+      <div class="v3-faq-item">
+        <button type="button" class="v3-faq-q" aria-expanded="false"><span>Почему процент мастеру считается не как ставка за час</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <div class="v3-faq-a"><div><p>При ставке за час выплата мастеру известна заранее и просто складывается с остальными расходами. При проценте от чека выплата зависит от цены, а цена зависит от выплаты. Поэтому минимальная цена делится на остаток после процента мастера. Если считать проще, получается цена ниже настоящей, и салон недобирает на каждой услуге.</p></div></div>
+      </div>
+      <div class="v3-faq-item">
+        <button type="button" class="v3-faq-q" aria-expanded="false"><span>Учитывать ли налоги и оборудование</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <div class="v3-faq-a"><div><p>Оборудование и ремонт удобно разложить на месяцы и добавить к постоянным расходам: взяли стоимость, поделили на срок службы в месяцах. С налогом аккуратнее: он берётся с оборота или с прибыли, поэтому его считают после цены, а не до. Чтобы цена уже закрывала налог, поднимите желаемую прибыль с часа.</p></div></div>
+      </div>
+      <div class="v3-faq-item">
+        <button type="button" class="v3-faq-q" aria-expanded="false"><span>Куда уходят мои числа</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <div class="v3-faq-a"><div><p>Никуда. Расчёт идёт в вашем браузере, на сервер не отправляется ни одно поле. Введённое остаётся в памяти браузера, чтобы при следующем заходе не вводить всё заново, и вы в любой момент можете очистить его вместе с данными сайта.</p></div></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="v3-cta">
+    <div class="v3-wrap v3-cta-in">
+      <h2>Сделано командой Стэлакс</h2>
+      <p>Стэлакс отвечает клиентам и записывает их сам. Пять дней за 1 ₽.</p>
+      <a class="v3-btn v3-btn-solid v3-btn-lg" href="https://stelaxai.ru" target="_blank" rel="noopener">Попробовать за 1 ₽</a>
+    </div>
+  </section>
+</main>
+
+<footer class="v3-foot">
+  <div class="v3-wrap">
+    <a class="v3-logo v3-foot-brand" href="../index.html">
+      <svg class="v3-logo-s" viewBox="0 0 48 48" width="25" height="25" fill="none" aria-hidden="true"><defs><linearGradient id="v3-mark-s-g" x1="7" y1="5" x2="41" y2="43" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8a9dff"></stop><stop offset=".48" stop-color="#3a56ee"></stop><stop offset="1" stop-color="#2438cc"></stop></linearGradient></defs><path d="M34.5 15.5a9.5 9.5 0 1 0-10.5 9.5 9.5 9.5 0 1 1-10.5 9.5" stroke="url(#v3-mark-s-g)" stroke-width="5.4" stroke-linecap="round" fill="none"></path></svg>Стэлакс
+    </a>
+    <div class="v3-foot-bottom">
+      <p>Бесплатные инструменты для салонов и бизнеса на записи</p>
+      <a href="https://stelaxai.ru" target="_blank" rel="noopener">stelaxai.ru</a>
+      <a href="mailto:work@stelaxai.com">work@stelaxai.com</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/app.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Калькулятор себестоимости услуги и минимальной цены","applicationCategory":"BusinessApplication","operatingSystem":"Любая, работает в браузере","description":"Считает себестоимость услуги салона с учётом часа кресла, расходников и оплаты мастера, показывает минимальную цену, цену под желаемую прибыль и число услуг до окупаемости месяца.","inLanguage":"ru","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"},"author":{"@type":"Organization","name":"Стэлакс","url":"https://stelaxai.ru"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"ru","mainEntity":[
+{"@type":"Question","name":"Что писать в постоянные расходы","acceptedAnswer":{"@type":"Answer","text":"Всё, что салон платит каждый месяц, даже когда в записи пусто: аренда, коммуналка, оклад администратора, реклама, подписки на сервисы, бухгалтерия, уборка, обслуживание кассы. Расходники и оплату мастера сюда не вносите, они считаются отдельно по каждой услуге, иначе одни и те же деньги попадут в расчёт дважды."}},
+{"@type":"Question","name":"Откуда взять загрузку кресла","acceptedAnswer":{"@type":"Answer","text":"Из своей записи за прошлый месяц. Поделите часы, на которые были записи, на все рабочие часы кресла. Если точных данных нет, посчитайте по памяти за неделю. Чем ниже загрузка, тем дороже каждый занятый час, потому что пустые часы тоже оплачены арендой."}},
+{"@type":"Question","name":"Почему процент мастеру считается не как ставка за час","acceptedAnswer":{"@type":"Answer","text":"При ставке за час выплата мастеру известна заранее и просто складывается с остальными расходами. При проценте от чека выплата зависит от цены, а цена зависит от выплаты. Поэтому минимальная цена делится на остаток после процента мастера. Если считать проще, получается цена ниже настоящей, и салон недобирает на каждой услуге."}},
+{"@type":"Question","name":"Учитывать ли налоги и оборудование","acceptedAnswer":{"@type":"Answer","text":"Оборудование и ремонт удобно разложить на месяцы и добавить к постоянным расходам: взяли стоимость, поделили на срок службы в месяцах. С налогом аккуратнее: он берётся с оборота или с прибыли, поэтому его считают после цены, а не до. Чтобы цена уже закрывала налог, поднимите желаемую прибыль с часа."}},
+{"@type":"Question","name":"Куда уходят мои числа","acceptedAnswer":{"@type":"Answer","text":"Никуда. Расчёт идёт в вашем браузере, на сервер не отправляется ни одно поле. Введённое остаётся в памяти браузера, чтобы при следующем заходе не вводить всё заново, и вы в любой момент можете очистить его вместе с данными сайта."}}]}
+</script>
+</body>
+</html>
